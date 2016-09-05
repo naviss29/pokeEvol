@@ -24,7 +24,7 @@ include 'connexion/PDO.php';
         <section id="banner">
             <div class="inner split">
                 <section>
-                    <h2>Bienvenue sur PokeEVol</h2>
+                    <h2>Bienvenue sur PokeEvol</h2>
                 </section>
                 <section>
                     <p>Ce site a été conçu pour calculer le nombre total des évolutions de votre compte. <br/>
@@ -71,9 +71,7 @@ include 'connexion/PDO.php';
 
         <!-- Footer -->
         <footer id="footer">
-            <div class="copyright">
-                &copy; Untitled. All rights reserved. Images: <a href="http://unsplash.com">Unsplash</a>. Design: <a href="http://templated.co">TEMPLATED</a>.
-            </div>
+            
         </footer>
 
         <!-- Scripts -->
