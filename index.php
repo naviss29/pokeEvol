@@ -24,11 +24,11 @@ include 'connexion/PDO.php';
         <section id="banner">
             <div class="inner split">
                 <section>
-                    <h2>Bienvenu sur PokeEVol</h2>
+                    <h2>Bienvenue sur PokeEVol</h2>
                 </section>
                 <section>
-                    <p>Ce site a été conçu pour calculer le nombre total des évolution de votre compte. <br/>
-                        Pour ce faire remplicez le formulaire ci-dessous , une fois valider vous saurais le nombre d'évolutions possibles. </p>
+                    <p>Ce site a été conçu pour calculer le nombre total des évolutions de votre compte. <br/>
+                        Pour ce faire remplissez le formulaire ci-dessous. Une fois validé vous saurez le nombre d'évolutions possibles. </p>
                 </section>
                  
             </div>
