@@ -25,26 +25,24 @@ function calculEvol($tabnbpokemon) {
     $resultatGrande = array();
     $resultatMoyenne = array();
     $resultatPetite = array();
-
     //Récupération de tableaux en rapprt avec le nombre de bonbons nécessaires pour les évolutions
     foreach ($tabnbpokemon as $request) {
         if ($request['2'] == 12) {
-            $petiteEvolArray[] = array("nom" => $request['nom'], "nombrePokemon" => $request['nbPokemon'], "nombreBonbon" => $request['0'], 'typeBonbon' => $request['1']);
+            $petiteEvolArray[] = array("nom" => $request['nom'], "nombrePokemon" => intval($request['nbPokemon']), "nombreBonbon" => intval($request['0']), 'typeBonbon' => $request['1']);
         }
         if ($request['2'] == 25) {
-            $moyenneEvolArray[] = array("nom" => $request['nom'], "nombreBonbon" => $request['0'], "nombrePokemon" => $request['nbPokemon'], 'typeBonbon' => $request['1']);
+            $moyenneEvolArray[] = array("nom" => $request['nom'], "nombreBonbon" => intval($request['0']), "nombrePokemon" => intval($request['nbPokemon']), 'typeBonbon' => $request['1']);
         }
         if ($request['2'] == 50) {
-            $grandeEvolArray[] = array("nom" => $request['nom'], "nombreBonbon" => $request['0'], "nombrePokemon" => $request['nbPokemon'], 'typeBonbon' => $request['1']);
+            $grandeEvolArray[] = array("nom" => $request['nom'], "nombreBonbon" => intval($request['0']), "nombrePokemon" => intval($request['nbPokemon']), 'typeBonbon' => $request['1']);
         }
         if ($request['2'] == 100) {
-            $immenseEvolArray[] = array("nom" => $request['nom'], "nombreBonbon" => $request['0'], "nombrePokemon" => $request['nbPokemon'], 'typeBonbon' => $request['1']);
+            $immenseEvolArray[] = array("nom" => $request['nom'], "nombreBonbon" => intval($request['0']), "nombrePokemon" => intval($request['nbPokemon']), 'typeBonbon' => $request['1']);
         }
         if ($request['2'] == 400) {
-            $legendaireEvolArray[] = array("nom" => $request['nom'], "nombreBonbon" => $request['0'], "nombrePokemon" => $request['nbPokemon'], 'typeBonbon' => $request['1']);
+            $legendaireEvolArray[] = array("nom" => $request['nom'], "nombreBonbon" => intval($request['0']), "nombrePokemon" => intval($request['nbPokemon']), 'typeBonbon' => $request['1']);
         }
     }
-
     //Boucle pour le calcul des petites évolutions
     foreach ($petiteEvolArray as $petiteEvol) {
         $nombreEvolBonbon = intval($petiteEvol['nombreBonbon'] / 12);
@@ -78,7 +76,7 @@ function calculEvol($tabnbpokemon) {
         $typeBonbon = $moyenneEvol['typeBonbon'];
         //on boucle pour voir s'il ne reste pas des bonbons d'avant
         foreach ($petiteEvolTab as $petiteEvol) {
-            if ($typeBonbon == $petiteEvol['typeBonbon']) {
+            if ($typeBonbon == $petiteEvol['typeBonbon'] && $petiteEvol['reste']!= 0) {
                 $nombreEvolBonbon = intval($petiteEvol['reste'] / 25);
             }
         }
@@ -112,13 +110,13 @@ function calculEvol($tabnbpokemon) {
 
         //on boucle pour voir s'il ne reste pas des bonbons des petites évolutions   
         foreach ($petiteEvolTab as $petiteEvol) {
-            if ($typeBonbon == $petiteEvol['typeBonbon']) {
+            if ($typeBonbon == $petiteEvol['typeBonbon'] && $petiteEvol['reste']!= 0) {
                 $nombreEvolBonbon = intval($petiteEvol['reste'] / 50);
             }
         }
         //on boucle pour voir s'il ne reste pas des bonbons des moyennes évolutions
         foreach ($moyenneEvolTab as $moyenneEvol) {
-            if ($typeBonbon == $moyenneEvol['typeBonbon']) {
+            if ($typeBonbon == $moyenneEvol['typeBonbon'] && $moyenneEvol['reste']!= 0) {
                 $nombreEvolBonbon = intval($moyenneEvol['reste'] / 50);
             }
         }
@@ -128,7 +126,6 @@ function calculEvol($tabnbpokemon) {
         } else {
             $grandeEvolCalcul = $nombreEvolBonbon;
         }
-
         $tranche = $grandeEvolCalcul / 50;
         $restePokemon = $nombreEvolPokemon - $grandeEvolCalcul;
         $resteBonbon = $grandeEvol['nombreBonbon'] - ($grandeEvolCalcul * 49);
@@ -158,19 +155,20 @@ function calculEvol($tabnbpokemon) {
         $typeBonbon = $immenseEvol['typeBonbon'];
         //on boucle pour voir s'il ne reste pas des bonbons des petites évolutions   
         foreach ($petiteEvolTab as $petiteEvol) {
-            if ($typeBonbon == $petiteEvol['typeBonbon']) {
+            if ($typeBonbon == $petiteEvol['typeBonbon'] && $petiteEvol['reste']!= 0) {
                 $nombreEvolBonbon = intval($petiteEvol['reste'] / 100);
             }
         }
         //on boucle pour voir s'il ne reste pas des bonbons des moyennes évolutions
         foreach ($moyenneEvolTab as $moyenneEvol) {
-            if ($typeBonbon == $moyenneEvol['typeBonbon']) {
+            if ($typeBonbon == $moyenneEvol['typeBonbon'] && $moyenneEvol['reste'] != 0) {    
                 $nombreEvolBonbon = intval($moyenneEvol['reste'] / 100);
             }
         }
         //on boucle pour voir s'il ne reste pas des bonbons des grande évolutions
         foreach ($grandeEvolTab as $grandeEvol) {
-            if ($typeBonbon == $grandeEvol['typeBonbon']) {
+            
+            if ($typeBonbon == $grandeEvol['typeBonbon']&& $grandeEvol['reste']!= 0) {
                 $nombreEvolBonbon = intval($grandeEvol['reste'] / 100);
             }
         }
@@ -301,6 +299,6 @@ function calculEvol($tabnbpokemon) {
 
     $evolCalcul = array_sum($resultatLegendaire) + array_sum($resultatImmense) + array_sum($resultatGrande) + array_sum($resultatMoyenne) + array_sum($resultatPetite);
     $evolTab = array('petiteEvolTab' => $petiteEvolResultTab, 'moyenneEvolTab' => $moyenneEvolResultTab, 'grandeEvolTab' => $grandeEvolResultTab, 'immenseEvolTab' => $immenseEvolResultTab, 'legendaireEvolTab' => $legendaireEvolResultTab, 'resultat' => $evolCalcul);
-    
+   
     return $evolTab;
 }
