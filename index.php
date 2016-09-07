@@ -17,6 +17,23 @@ include 'connexion/PDO.php';
         <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
         <link rel="stylesheet" href="assets/css/main.css" />
         <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-47560990-3', 'auto');
+            ga('send', 'pageview');
+
+        </script>
     </head>
     <body>
 
@@ -30,7 +47,7 @@ include 'connexion/PDO.php';
                     <p>Ce site a été conçu pour calculer le nombre total des évolutions de votre compte. <br/>
                         Pour ce faire remplissez le formulaire ci-dessous. Une fois validé vous saurez le nombre d'évolutions possibles. </p>
                 </section>
-                 
+
             </div>
         </section>
 
@@ -67,11 +84,11 @@ include 'connexion/PDO.php';
 
 
             </section>
-            <?php } ?>
+        <?php } ?>
 
         <!-- Footer -->
         <footer id="footer">
-            
+
         </footer>
 
         <!-- Scripts -->
